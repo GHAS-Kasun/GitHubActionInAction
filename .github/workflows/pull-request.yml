@@ -1,0 +1,18 @@
+name: Pull-request Action
+
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  MyFirstJob:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "👋 Hello World!"
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: List files in Repository
+        run: |
+          echo "This example for Pull-request trigger will list the files in the repository ${{ github.repository }}:" 
+          tree
+          ls -lah
