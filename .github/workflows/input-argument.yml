@@ -1,0 +1,38 @@
+name: Input Argument Action
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Name of the person to greet'
+        required: true
+        default: 'GitHub Actions'
+      homedrive:
+        description: 'Drive letter for the home directory'
+        required: true
+        default: 'C:'
+      loglevel:
+        description: 'Log level for the action'
+        required: true
+        type: choice
+        default: 'info'
+        options:
+          - 'info'
+          - 'warning'
+          - 'error'
+          - 'debug'
+
+jobs:
+  MyFirstJob:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "👋 Hello ${{ github.event.inputs.name }}!"
+      - run: echo "Home directory is ${{ github.event.inputs.homedrive }}"
+      - run: echo "Log level is ${{ github.event.inputs.loglevel }}"
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: List files in Repository
+        run: |
+          echo "This example for Manual trigger will list the files in the repository ${{ github.repository }}:" 
+          tree
+          ls -lah
