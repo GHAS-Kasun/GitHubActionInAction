@@ -1,0 +1,17 @@
+name: Manual Trigger Action
+
+on:
+  workflow_dispatch:
+
+jobs:
+  MyFirstJob:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "👋 Hello World!"
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: List files in Repository
+        run: |
+          echo "This example for Manual trigger will list the files in the repository ${{ github.repository }}:" 
+          tree
+          ls -lah
