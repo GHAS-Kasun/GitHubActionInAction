@@ -1,0 +1,20 @@
+name: "GitHub Output Action"
+on:
+  workflow_dispatch:
+jobs:
+  job-1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Color
+        id: set-color
+        run: echo "SELECTED_COLOR=blue" >> $GITHUB_OUTPUT
+      - name: Get Color
+        run: echo "The selected color is ${{ steps.set-color.outputs.SELECTED_COLOR }}"
+      - id: set-secret
+        name: Generate Secret
+        run: |
+          the_secret=$((RANDOM))
+          echo "::add-mask::$the_secret"
+          echo "secret-number=$the_secret" >> $GITHUB_OUTPUT
+      - name: Get Secret
+        run: echo "The secret number is ${{ steps.set-secret.outputs.secret-number }}"
